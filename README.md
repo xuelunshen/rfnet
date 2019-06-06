@@ -95,9 +95,11 @@ sh ms.sh 0 /home/sxl/DL/runs 10_24_09_25 e121_NN_0.480_NNT_0.655_NNDR_0.813_Mean
 We would like to thank
 
 > EF dataset [1]
+
 > HPatches dataset [2]
 
 for providing the image data.
 
 > [1] Zitnick, C.L., & Ramnath, K. (2011). Edge foci interest points. 2011 International Conference on Computer Vision (ICCV), 359-366.
+
 > [2] Balntas, V., Lenc, K., Vedaldi, A., & Mikolajczyk, K. (2017). HPatches: A Benchmark and Evaluation of Handcrafted and Learned Local Descriptors. 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 3852-3861.
