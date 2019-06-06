@@ -1,9 +1,8 @@
-# RF-Net
+# RF-Net: An End-to-End Image Matching Network based on Receptive Field
 
 This repository is a Pytorch implementation for
 
-> Xuelun Shen, Cheng Wang, Xin Li, Zenglei Yu, Jonathan Li, Chenglu Wen, Ming Cheng, Zijian He. "RF-Net: An End-to-End Image Matching Network based on Receptive Field
-." In the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019, pp. 8132-8140.
+> Xuelun Shen, Cheng Wang, Xin Li, Zenglei Yu, Jonathan Li, Chenglu Wen, Ming Cheng, Zijian He. "RF-Net: An End-to-End Image Matching Network based on Receptive Field." In the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019, pp. 8132-8140.
 
 If you use this code in your research, please cite [the paper](https://arxiv.org/abs/1906.00604).
 
