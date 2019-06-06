@@ -1,0 +1,7 @@
+scipy
+tensorboardX
+scikit-image
+pandas
+easydict
+opencv-contrib-python==3.4.2.17
+tqdm
