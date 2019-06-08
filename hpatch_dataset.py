@@ -10,6 +10,7 @@ from skimage import io, transform, color
 from torch.utils.data import Dataset
 
 from utils.common_utils import gct
+from utils.image_utils import im_rescale
 
 
 class HpatchDataset(Dataset):
@@ -123,20 +124,6 @@ class Rescale(object):
             sample["homo21"],
         )
         im1_raw, im2_raw = im1, im2
-
-        def im_rescale(im, output_size):
-            h, w = im.shape[:2]
-            if isinstance(output_size, int):
-                if h > w:
-                    new_h, new_w = output_size * h / w, output_size
-                else:
-                    new_h, new_w = output_size, output_size * w / h
-            else:
-                new_h, new_w = output_size
-            new_h, new_w = int(new_h), int(new_w)
-            img = transform.resize(im, (new_h, new_w), mode="constant")
-
-            return img, h, w, new_w / w, new_h / h
 
         im1, im1h, im1w, sw1, sh1 = im_rescale(im1, self.output_size)
         im2, im2h, im2w, sw2, sh2 = im_rescale(im2, self.output_size)

@@ -3,6 +3,7 @@
 # @Author  : xylon
 import torch
 from torch.nn import functional as F
+from skimage import transform
 
 from utils.math_utils import L2Norm
 
@@ -372,3 +373,18 @@ def soft_max_and_argmax_1d(
         return score_map, scale_map, orint_map
     else:
         return score_map, scale_map
+
+
+def im_rescale(im, output_size):
+    h, w = im.shape[:2]
+    if isinstance(output_size, int):
+        if h > w:
+            new_h, new_w = output_size * h / w, output_size
+        else:
+            new_h, new_w = output_size, output_size * w / h
+    else:
+        new_h, new_w = output_size
+    new_h, new_w = int(new_h), int(new_w)
+    img = transform.resize(im, (new_h, new_w), mode="constant")
+
+    return img, h, w, new_w / w, new_h / h
