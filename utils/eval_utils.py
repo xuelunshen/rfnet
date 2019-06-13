@@ -165,16 +165,24 @@ def threshold_match_score(des1, des2, kp1w, kp2, visible, DES_THRSH, COO_THRSH):
     return correct_matches, predict_matches, correspond_matches
 
 
-def nearest_neighbor_distance_ratio_match_score(
-    des1, des2, kp1w, kp2, visible, COO_THRSH, threshold=0.7
-):
+def nearest_neighbor_distance_ratio_match(des1, des2, kp2, threshold):
     des_dist_matrix = distance_matrix_vector(des1, des2)
     sorted, indices = des_dist_matrix.sort(dim=-1)
     Da, Db, Ia = sorted[:, 0], sorted[:, 1], indices[:, 0]
     DistRatio = Da / Db
-    predict_label = DistRatio.lt(threshold) * visible
-
+    predict_label = DistRatio.lt(threshold)
     nn_kp2 = kp2.index_select(dim=0, index=Ia.view(-1))
+    return predict_label, nn_kp2
+
+
+def nearest_neighbor_distance_ratio_match_score(
+    des1, des2, kp1w, kp2, visible, COO_THRSH, threshold=0.7
+):
+    predict_label, nn_kp2 = nearest_neighbor_distance_ratio_match(
+        des1, des2, kp2, threshold
+    )
+
+    predict_label = predict_label * visible
 
     coo_dist_matrix = pairwise_distances(
         kp1w[:, 1:3].float(), nn_kp2[:, 1:3].float()

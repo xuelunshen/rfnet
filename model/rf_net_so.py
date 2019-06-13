@@ -215,4 +215,4 @@ class RFNetSO(RFNetModule):
         # inference
         _, kp, des = self.inference(img, img_info, img_raw)
 
-        return kp, des
+        return kp, des, img
