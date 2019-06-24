@@ -227,7 +227,7 @@ class RFDetModule(nn.Module):
         # visualization numbers
         Nvi = torch.clamp(im1visible_mask.sum(dim=(3, 2, 1)), min=2.0)
         loss = (
-            torch.sum(l2_element_diff * im1visible_mask, dim=(3, 2, 1)) / Nvi + 1e-8
+            torch.sum(l2_element_diff * im1visible_mask, dim=(3, 2, 1)) / (Nvi + 1e-8)
         ).mean()
 
         return loss
