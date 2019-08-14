@@ -57,8 +57,8 @@ if __name__ == "__main__":
     # detect and compute
     ###############################################################################
     img1_path, img2_path = args.imgpath.split("@")
-    kp1, des1, img1 = model.detectAndCompute(img1_path, device, (320, 240))
-    kp2, des2, img2 = model.detectAndCompute(img2_path, device, (320, 240))
+    kp1, des1, img1 = model.detectAndCompute(img1_path, device, (240, 320))
+    kp2, des2, img2 = model.detectAndCompute(img2_path, device, (240, 320))
 
     predict_label, nn_kp2 = nearest_neighbor_distance_ratio_match(des1, des2, kp2, 0.7)
     idx = predict_label.nonzero().view(-1)
