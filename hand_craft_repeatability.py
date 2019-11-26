@@ -19,12 +19,10 @@ from utils.math_utils import pairwise_distances
 
 def parse_batch_np(one_batch):
     std, mean = cfg.IMAGE.STD, cfg.IMAGE.MEAN
-    im1_data_ = np.squeeze(
-        one_batch['im1'].cpu().detach().numpy()) * std + mean
+    im1_data_ = np.squeeze(one_batch['im1'].cpu().detach().numpy()) * std + mean
     im1_info_ = one_batch['im1_info'].float()
     homo12_ = np.squeeze(one_batch['homo12'].cpu().detach().numpy())
-    im2_data_ = np.squeeze(
-        one_batch['im2'].cpu().detach().numpy()) * std + mean
+    im2_data_ = np.squeeze(one_batch['im2'].cpu().detach().numpy()) * std + mean
     im2_info_ = one_batch['im2_info'].float()
     homo21_ = np.squeeze(one_batch['homo21'].cpu().detach().numpy())
     im1_raw_ = (one_batch['im1_raw'] * std + mean).float()
