@@ -17,8 +17,7 @@ from config import cfg
 from utils.math_utils import pairwise_distances
 
 
-def parse_batch_np(one_batch):
-    std, mean = cfg.IMAGE.STD, cfg.IMAGE.MEAN
+def parse_batch_np(one_batch, mean, std):
     im1_data_ = np.squeeze(one_batch['im1'].cpu().detach().numpy()) * std + mean
     im1_info_ = one_batch['im1_info'].float()
     homo12_ = np.squeeze(one_batch['homo12'].cpu().detach().numpy())
@@ -116,6 +115,8 @@ if __name__ == '__main__':
         print(f'cannot find {args.data}')
         exit(-1)
 
+    mean=cfg[seq]["MEAN"]
+    std=cfg[seq]["STD"]
     data_loader = DataLoader(
         HpatchDataset(
             data_type="test",
@@ -126,9 +127,7 @@ if __name__ == '__main__':
             transform=transforms.Compose(
                 [
                     Grayscale(),
-                    Normalize(
-                        mean=cfg[seq]["MEAN"], std=cfg[seq]["STD"]
-                    ),
+                    Normalize(mean=mean, std=std),
                     Rescale((960, 1280)),
                     Rescale((240, 320)),
                     ToTensor()
@@ -143,7 +142,7 @@ if __name__ == '__main__':
     useful_list = []
     repeat_list = []
     for i_batch, sample_batched in enumerate(data_loader, 1):
-        im1_data, im1_info, homo12, im2_data, im2_info, homo21, im1_raw, im2_raw = parse_batch_np(sample_batched)
+        im1_data, im1_info, homo12, im2_data, im2_info, homo21, im1_raw, im2_raw = parse_batch_np(sample_batched, mean, std)
 
         gray1, gray2 = (im1_data * 255).astype(np.uint8), (im2_data * 255).astype(np.uint8)
 
